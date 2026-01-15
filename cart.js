@@ -1,9 +1,8 @@
 [file name]: cart.js
 [file content begin]
-// Simple Cart System
-let cart = JSON.parse(localStorage.getItem('baddiesCart')) || [];
-
+// Cart functions
 function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('baddiesCart')) || [];
     const existingIndex = cart.findIndex(item => item.id === product.id);
     
     if (existingIndex > -1) {
@@ -19,41 +18,66 @@ function addToCart(product) {
     }
     
     localStorage.setItem('baddiesCart', JSON.stringify(cart));
-    updateCartCount();
     showNotification(`${product.name} added to cart!`);
+    updateCartCount();
 }
 
 function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('baddiesCart')) || [];
     const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const cartCountElement = document.querySelector('.cart-count');
+    const cartCountElements = document.querySelectorAll('.cart-count');
     
-    if (cartCountElement) {
-        cartCountElement.textContent = count;
-        cartCountElement.style.display = count > 0 ? 'flex' : 'none';
-    }
+    cartCountElements.forEach(element => {
+        if (element) {
+            element.textContent = count;
+            element.style.display = count > 0 ? 'flex' : 'none';
+        }
+    });
 }
 
 function showNotification(message) {
+    // Remove existing notification
+    const oldNotification = document.querySelector('.cart-notification');
+    if (oldNotification) oldNotification.remove();
+    
+    // Create new notification
     const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #000;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        z-index: 1000;
+    notification.className = 'cart-notification';
+    notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        ">
+            ${message}
+        </div>
     `;
+    
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
     
     document.body.appendChild(notification);
     
     setTimeout(() => {
         notification.remove();
+        style.remove();
     }, 3000);
 }
 
-// Initialize cart count on page load
+// Initialize cart count when page loads
 document.addEventListener('DOMContentLoaded', updateCartCount);
 [file content end]
