@@ -12,9 +12,9 @@
 <body class="shop">
 
 <header class="topbar">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
+  <div class="topbar-header">
     <h1>Baddies Cheap</h1>
-    <a href="cart.html" style="position: relative; padding: 8px;">
+    <a href="cart.html" class="cart-button">
       <span style="font-size: 20px;">🛒</span>
       <span class="cart-count" style="
         position: absolute;
@@ -43,12 +43,30 @@
 </header>
 
 <main class="items-wrapper">
-  <div id="products" class="items-grid"></div>
+  <div id="products" class="items-grid">
+    <!-- Products will load here -->
+  </div>
 </main>
 
+<!-- IMPORTANT: Load products.js BEFORE script.js -->
 <script src="products.js"></script>
 <script src="cart.js"></script>
 <script src="script.js"></script>
+
+<script>
+  // Initialize cart count after scripts load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Update cart count
+    const cart = JSON.parse(localStorage.getItem('baddiesCart')) || [];
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    const cartCountElement = document.querySelector('.cart-count');
+    
+    if (cartCountElement) {
+      cartCountElement.textContent = count;
+      cartCountElement.style.display = count > 0 ? 'flex' : 'none';
+    }
+  });
+</script>
 </body>
 </html>
 [file content end]
