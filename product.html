@@ -1,5 +1,3 @@
-[file name]: product.html
-[file content begin]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,134 +6,280 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Product page specific styles */
     .product-page-wrapper {
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
     }
-    
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
+
+    .breadcrumb {
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .breadcrumb a {
       color: #666;
       text-decoration: none;
     }
-    
-    .back-link:hover {
+
+    .breadcrumb a:hover {
       text-decoration: underline;
     }
-    
+
+    .breadcrumb span {
+      margin: 0 8px;
+      color: #999;
+    }
+
     .product-container {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 40px;
       background: white;
       border-radius: 12px;
       padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    
+
     @media (min-width: 768px) {
       .product-container {
         grid-template-columns: 1fr 1fr;
+        padding: 40px;
       }
     }
-    
+
+    .product-image-container {
+      position: relative;
+    }
+
     .product-image {
       width: 100%;
-      max-width: 500px;
-      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #f8f8f8;
       border-radius: 12px;
-      background: #f5f5f5;
       padding: 30px;
-      margin: 0 auto;
     }
-    
+
+    .product-details {
+      padding: 10px 0;
+    }
+
     .product-title {
-      font-size: 28px;
-      margin: 0 0 15px 0;
-    }
-    
-    .product-price {
       font-size: 32px;
-      font-weight: bold;
-      margin: 20px 0;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      line-height: 1.2;
+      color: #111;
     }
-    
-    .old-price {
-      font-size: 20px;
-      color: #999;
-      text-decoration: line-through;
-      margin-left: 10px;
-      font-weight: normal;
-    }
-    
+
     .product-description {
-      line-height: 1.6;
-      margin-bottom: 30px;
-      color: #444;
-    }
-    
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin: 30px 0;
-    }
-    
-    .add-to-cart-btn,
-    .buy-now-btn {
-      padding: 16px;
-      border: none;
-      border-radius: 10px;
       font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #eee;
     }
-    
-    .add-to-cart-btn {
-      background: #000;
-      color: white;
-    }
-    
-    .add-to-cart-btn:hover {
-      background: #333;
-    }
-    
-    .buy-now-btn {
-      background: #00D632;
-      color: white;
-    }
-    
-    .buy-now-btn:hover {
-      background: #00b82e;
-    }
-    
-    .stock-badge {
-      display: inline-block;
+
+    .stock-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #e9f8ef;
       color: #118a43;
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 20px;
+      font-weight: 500;
+      margin-bottom: 30px;
     }
-    
-    .error-message {
+
+    .stock-status::before {
+      content: "";
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: #118a43;
+      border-radius: 50%;
+    }
+
+    .price-container {
+      margin-bottom: 30px;
+    }
+
+    .current-price {
+      font-size: 36px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .old-price {
+      font-size: 20px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .buy-button {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 18px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
       text-align: center;
-      padding: 50px 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .buy-button:hover {
+      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .buy-button::after {
+      content: "→";
+      font-size: 18px;
+    }
+
+    .add-to-cart {
       background: white;
+      color: #111;
+      border: 2px solid #e4e4e4;
+      padding: 18px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .add-to-cart:hover {
+      border-color: #111;
+      background: #f8f8f8;
+    }
+
+    .features-list {
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .features-list h3 {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .features-list ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .features-list li {
+      padding: 6px 0;
+      font-size: 14px;
+      color: #444;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .features-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #666;
+    }
+
+    .store-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .store-icon {
+      width: 40px;
+      height: 40px;
+      background: #000;
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .store-details h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .store-details p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .message-container {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      background: #f8f8f8;
       border-radius: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .product-container {
+        padding: 20px;
+      }
+      
+      .product-title {
+        font-size: 24px;
+      }
+      
+      .current-price {
+        font-size: 28px;
+      }
+      
+      .buy-button, .add-to-cart {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body class="shop">
 
 <div class="product-page-wrapper">
-  <a href="index.html" class="back-link">← Back to Shop</a>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> <span>/</span> 
+    <a href="index.html">Shop</a> <span>/</span> 
+    <span id="breadcrumb-product"></span>
+  </div>
   
   <div id="product-content">
     <!-- Product content will be loaded here -->
@@ -143,105 +287,108 @@
 </div>
 
 <script src="products.js"></script>
-<script src="cart.js"></script>
 <script>
   const id = new URLSearchParams(window.location.search).get("id");
   const productContent = document.getElementById("product-content");
   
-  function loadProduct() {
-    if (!id) {
-      productContent.innerHTML = `
-        <div class="error-message">
-          <h2>Product Not Found</h2>
-          <p>No product ID specified.</p>
-          <a href="index.html" style="
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #000;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-          ">Go to Shop</a>
-        </div>
-      `;
-      return;
-    }
-    
-    if (typeof products === 'undefined') {
-      productContent.innerHTML = `
-        <div class="error-message">
-          <h2>Error Loading Products</h2>
-          <p>Please try refreshing the page.</p>
-          <a href="index.html" style="
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #000;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-          ">Go to Shop</a>
-        </div>
-      `;
-      return;
-    }
-    
-    const product = products.find(p => p.id === id);
-    
-    if (!product) {
-      productContent.innerHTML = `
-        <div class="error-message">
-          <h2>Product Not Found</h2>
-          <p>The product doesn't exist.</p>
-          <a href="index.html" style="
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #000;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-          ">Go to Shop</a>
-        </div>
-      `;
-      return;
-    }
-    
-    // Display product
+  // Check if products.js is loaded
+  if (typeof products === 'undefined') {
     productContent.innerHTML = `
-      <div class="product-container">
-        <div>
-          <img src="${product.image}" alt="${product.name}" class="product-image"
-               onerror="this.src='https://via.placeholder.com/500x500?text=Product+Image'">
-        </div>
-        <div>
-          <span class="stock-badge">In Stock • Ready to Deliver Instantly</span>
-          <h1 class="product-title">${product.name}</h1>
-          <p class="product-description">${product.description}</p>
-          <div class="product-price">
-            $${product.price}
-            ${product.oldPrice ? `<span class="old-price">$${product.oldPrice}</span>` : ''}
-          </div>
-          <div class="action-buttons">
-            <button class="add-to-cart-btn" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">
-              Add to Cart
-            </button>
-            <a class="buy-now-btn" 
-               href="https://cash.app/$lovinMoneynfood/${product.price}"
-               target="_blank">
-              Buy Now with Cash App
-            </a>
-          </div>
-          <p><small>Baddies Cheap - Premium items at affordable prices</small></p>
-        </div>
+      <div class="message-container">
+        <h2 style="color: #e53935;">Error Loading Products</h2>
+        <p style="margin-bottom: 20px;">Unable to load product data. Please try again later.</p>
+        <a href="index.html" style="display: inline-block; padding: 12px 24px; background: #000; color: white; text-decoration: none; border-radius: 8px;">Return to Shop</a>
       </div>
     `;
+  } else if (!id) {
+    // No ID provided
+    productContent.innerHTML = `
+      <div class="message-container">
+        <h2>Product Not Found</h2>
+        <p style="margin-bottom: 20px;">No product ID was specified.</p>
+        <a href="index.html" style="display: inline-block; padding: 12px 24px; background: #000; color: white; text-decoration: none; border-radius: 8px;">Browse All Products</a>
+      </div>
+    `;
+  } else {
+    const p = products.find(x => x.id === id);
+    
+    if (!p) {
+      // Product not found
+      productContent.innerHTML = `
+        <div class="message-container">
+          <h2>Product Not Found</h2>
+          <p style="margin-bottom: 20px;">The product you're looking for doesn't exist.</p>
+          <a href="index.html" style="display: inline-block; padding: 12px 24px; background: #000; color: white; text-decoration: none; border-radius: 8px;">Continue Shopping</a>
+        </div>
+      `;
+    } else {
+      // Display product
+      document.title = `${p.name} - Baddies Cheap`;
+      document.getElementById('breadcrumb-product').textContent = p.name;
+      
+      // Create features from description (you can customize this based on your actual product data structure)
+      const descriptionLines = p.description.split('\n').filter(line => line.trim());
+      const mainDescription = descriptionLines[0] || p.description;
+      const features = descriptionLines.slice(1);
+      
+      let featuresHTML = '';
+      if (features.length > 0) {
+        featuresHTML = `
+          <div class="features-list">
+            <h3>Product Details</h3>
+            <ul>
+              ${features.map(feature => `<li>${feature.replace(/^[-•]\s*/, '')}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+      
+      productContent.innerHTML = `
+        <div class="product-container">
+          <div class="product-image-container">
+            <img src="${p.image}" alt="${p.name}" class="product-image">
+          </div>
+          
+          <div class="product-details">
+            <h1 class="product-title">${p.name}</h1>
+            
+            <div class="stock-status">
+              In stock, ready to deliver instantly
+            </div>
+            
+            <div class="price-container">
+              <div class="current-price">$${p.price}</div>
+              ${p.oldPrice ? `<div class="old-price">$${p.oldPrice}</div>` : ''}
+            </div>
+            
+            <div class="action-buttons">
+              <button class="add-to-cart" onclick="alert('Add to cart functionality would go here')">
+                Add to cart
+              </button>
+              <a class="buy-button"
+                 href="https://cash.app/$lovinMoneynfood/${p.price}"
+                 target="_blank">
+                 Buy it now
+              </a>
+            </div>
+            
+            ${featuresHTML}
+            
+            <p class="product-description">${mainDescription}</p>
+            
+            <div class="store-info">
+              <div class="store-icon">BC</div>
+              <div class="store-details">
+                <h4>MM2 CHEAP</h4>
+                <p>Premium items at affordable prices</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
   }
-  
-  // Load product when page loads
-  document.addEventListener('DOMContentLoaded', loadProduct);
 </script>
+
 </body>
 </html>
-[file content end]
