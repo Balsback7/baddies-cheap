@@ -5,6 +5,7 @@ function render(list) {
   list.forEach(p => {
     container.innerHTML += `
       <a class="card" href="product.html?id=${p.id}">
+        <div class="rainbow-bg"></div>
         <img src="${p.image}">
         <h3>${p.name}</h3>
         <p class="price">$${p.price} <span>$${p.oldPrice}</span></p>
