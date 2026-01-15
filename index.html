@@ -4,35 +4,88 @@
   <meta charset="UTF-8" />
   <title>Baddies Cheap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <header class="navbar">
-    <div class="logo">BADDIES<span>.cheap</span></div>
-    <nav>
+    <div class="nav-left">
+      <div class="logo">
+        <span class="mm">MM</span><span class="two">2</span>
+        <span class="brand">BADDIES</span>
+      </div>
+    </div>
+
+    <nav class="nav-center">
       <a href="#">All Items</a>
       <a href="#">Knives</a>
       <a href="#">Guns</a>
       <a href="#">Bundles</a>
+      <a href="#">Tutorial</a>
+      <a href="#">Contact</a>
     </nav>
+
+    <div class="nav-right">
+      <div class="icon">🔍</div>
+      <div class="icon">👤</div>
+      <div class="icon">🛒</div>
+    </div>
   </header>
 
-  <main class="products">
-    <div class="card">
-      <div class="badge">Save $18.00</div>
-      <img src="https://via.placeholder.com/300" />
+  <!-- SECTION TITLE -->
+  <section class="section-title">
+    <h2>❄️ Christmas 2025 Exclusives ❄️</h2>
+  </section>
+
+  <!-- PRODUCTS -->
+  <main class="product-grid">
+
+    <div class="product-card">
+      <div class="save-badge">Save $18.00 USD</div>
+      <img src="assets/placeholder.png" />
       <h3>Blizzard Gun</h3>
-      <p class="price">$6.99 <span>$24.99</span></p>
+      <div class="price">
+        <span class="current">$6.99 USD</span>
+        <span class="old">$24.99 USD</span>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="badge">Save $40.00</div>
-      <img src="https://via.placeholder.com/300" />
-      <h3>Snowstorm Bundle</h3>
-      <p class="price">$9.99 <span>$49.99</span></p>
+    <div class="product-card">
+      <div class="save-badge">Save $18.10 USD</div>
+      <img src="assets/placeholder.png" />
+      <h3>Snowstorm Knife</h3>
+      <div class="price">
+        <span class="current">$6.89 USD</span>
+        <span class="old">$24.99 USD</span>
+      </div>
     </div>
+
+    <div class="product-card">
+      <div class="save-badge">Save $40.00 USD</div>
+      <img src="assets/placeholder.png" />
+      <h3>Snowstorm Bundle</h3>
+      <div class="price">
+        <span class="current">$9.99 USD</span>
+        <span class="old">$49.99 USD</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="save-badge">Save $90.00 USD</div>
+      <img src="assets/placeholder.png" />
+      <h3>Snowcannon Gun</h3>
+      <div class="price">
+        <span class="current">$9.99 USD</span>
+        <span class="old">$99.99 USD</span>
+      </div>
+    </div>
+
   </main>
+
+  <div class="view-all">
+    <button>📄 View all</button>
+  </div>
 
 </body>
 </html>
