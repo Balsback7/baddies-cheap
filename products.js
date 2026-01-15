@@ -6,7 +6,8 @@ const products = [
     price: 13,
     oldPrice: 29.99,
     image: "https://cdn.meowia.com/baddies/loveboard.png",
-    description: "Exclusive Loveboard weapon"
+    description: "Exclusive Loveboard weapon",
+    relevance: 1
   },
   {
     id: "brassknuckles",
@@ -15,6 +16,7 @@ const products = [
     price: 12,
     oldPrice: 19.99,
     image: "https://cdn.meowia.com/baddies/brass-knuckles.png",
-    description: "Heavy-hitting Brass Knuckles"
+    description: "Heavy-hitting Brass Knuckles",
+    relevance: 2
   }
 ];
