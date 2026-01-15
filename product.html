@@ -1,3 +1,5 @@
+[file name]: product.html
+[file content begin]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,11 +58,14 @@
 
     .product-image {
       width: 100%;
+      max-width: 500px;
       aspect-ratio: 1 / 1;
       object-fit: contain;
       background: #f8f8f8;
       border-radius: 12px;
       padding: 30px;
+      margin: 0 auto;
+      display: block;
     }
 
     .product-details {
@@ -160,9 +165,9 @@
     }
 
     .add-to-cart {
-      background: white;
-      color: #111;
-      border: 2px solid #e4e4e4;
+      background: #000;
+      color: white;
+      border: 2px solid #000;
       padding: 18px 24px;
       border-radius: 10px;
       font-size: 16px;
@@ -173,43 +178,10 @@
     }
 
     .add-to-cart:hover {
-      border-color: #111;
-      background: #f8f8f8;
-    }
-
-    .features-list {
-      background: #f8f8f8;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 30px;
-    }
-
-    .features-list h3 {
-      margin: 0 0 12px 0;
-      font-size: 16px;
-      font-weight: 600;
-      color: #111;
-    }
-
-    .features-list ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .features-list li {
-      padding: 6px 0;
-      font-size: 14px;
-      color: #444;
-      position: relative;
-      padding-left: 20px;
-    }
-
-    .features-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #666;
+      background: #333;
+      border-color: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .store-info {
@@ -287,6 +259,7 @@
 </div>
 
 <script src="products.js"></script>
+<script src="cart.js"></script>
 <script>
   const id = new URLSearchParams(window.location.search).get("id");
   const productContent = document.getElementById("product-content");
@@ -326,23 +299,6 @@
       document.title = `${p.name} - Baddies Cheap`;
       document.getElementById('breadcrumb-product').textContent = p.name;
       
-      // Create features from description (you can customize this based on your actual product data structure)
-      const descriptionLines = p.description.split('\n').filter(line => line.trim());
-      const mainDescription = descriptionLines[0] || p.description;
-      const features = descriptionLines.slice(1);
-      
-      let featuresHTML = '';
-      if (features.length > 0) {
-        featuresHTML = `
-          <div class="features-list">
-            <h3>Product Details</h3>
-            <ul>
-              ${features.map(feature => `<li>${feature.replace(/^[-•]\s*/, '')}</li>`).join('')}
-            </ul>
-          </div>
-        `;
-      }
-      
       productContent.innerHTML = `
         <div class="product-container">
           <div class="product-image-container">
@@ -361,8 +317,10 @@
               ${p.oldPrice ? `<div class="old-price">$${p.oldPrice}</div>` : ''}
             </div>
             
+            <p class="product-description">${p.description}</p>
+            
             <div class="action-buttons">
-              <button class="add-to-cart" onclick="alert('Add to cart functionality would go here')">
+              <button class="add-to-cart" onclick="cart.add(${JSON.stringify(p).replace(/"/g, '&quot;')})">
                 Add to cart
               </button>
               <a class="buy-button"
@@ -372,14 +330,10 @@
               </a>
             </div>
             
-            ${featuresHTML}
-            
-            <p class="product-description">${mainDescription}</p>
-            
             <div class="store-info">
               <div class="store-icon">BC</div>
               <div class="store-details">
-                <h4>MM2 CHEAP</h4>
+                <h4>Baddies Cheap</h4>
                 <p>Premium items at affordable prices</p>
               </div>
             </div>
@@ -392,3 +346,4 @@
 
 </body>
 </html>
+[file content end]
