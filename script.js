@@ -1,8 +1,8 @@
+[file name]: script.js
+[file content begin]
 const container = document.getElementById("products");
 const searchInput = document.getElementById("search");
 const sortSelect = document.getElementById("sort");
-
-let current = [...products];
 
 function render(list) {
   container.innerHTML = "";
@@ -13,10 +13,9 @@ function render(list) {
       <a class="card" href="product.html?id=${p.id}">
         <div class="stock">In Stock</div>
         ${bestDeal ? `<div class="deal">BEST DEAL</div>` : ""}
-
-        <img src="${p.image}">
+        <img src="${p.image}" alt="${p.name}">
         <h3>${p.name}</h3>
-        <p class="price">$${p.price} <span>$${p.oldPrice}</span></p>
+        <p class="price">$${p.price} ${p.oldPrice ? `<span>$${p.oldPrice}</span>` : ''}</p>
       </a>
     `;
   });
@@ -42,4 +41,8 @@ function apply() {
 searchInput.addEventListener("input", apply);
 sortSelect.addEventListener("change", apply);
 
-apply();
+// Initial render
+if (typeof products !== 'undefined') {
+  apply();
+}
+[file content end]
