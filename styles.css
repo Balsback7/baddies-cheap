@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
 }
 
 body {
@@ -47,7 +47,8 @@ body {
 }
 
 .nav-right .icon {
-  margin-left: 14px;
+  display: inline-block;
+  margin-left: 15px;
   cursor: pointer;
 }
 
@@ -59,7 +60,6 @@ body {
 
 .section-title h2 {
   font-size: 22px;
-  font-weight: bold;
 }
 
 /* PRODUCTS */
@@ -75,8 +75,8 @@ body {
   border-radius: 10px;
   padding: 15px;
   position: relative;
-  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .product-card:hover {
@@ -109,7 +109,7 @@ body {
   text-decoration: line-through;
 }
 
-/* SAVE BADGE */
+/* BADGE */
 .save-badge {
   position: absolute;
   top: 10px;
