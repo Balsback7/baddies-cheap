@@ -1,80 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
   <title>Baddies Cheap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="navbar">
-  <div class="logo">
-    <span class="mm">MM</span><span class="two">2</span>
-    <span class="brand">BADDIES</span>
-  </div>
-
-  <nav class="nav-center">
-    <a href="#">All Items</a>
-    <a href="#">Knives</a>
-    <a href="#">Guns</a>
-    <a href="#">Bundles</a>
+  <div class="logo">MM2 <span>BADDIES</span></div>
+  <nav>
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('guns')">Guns</button>
+    <button onclick="filter('knives')">Knives</button>
+    <button onclick="filter('bundles')">Bundles</button>
   </nav>
 </header>
 
-<section class="section-title">
-  <h2>🔥 Featured Items 🔥</h2>
-</section>
+<main id="products" class="grid"></main>
 
-<main class="product-grid">
-
-  <!-- PRODUCT -->
-  <div class="product-card">
-    <div class="save-badge">Save $18.00 USD</div>
-    <img src="./assets/placeholder.png" />
-    <h3>Blizzard Gun</h3>
-    <div class="price">
-      <span class="current">$6.99 USD</span>
-      <span class="old">$24.99 USD</span>
-    </div>
-
-    <a class="buy-btn"
-       href="https://cash.app/$YOURCASHTAG/6.99"
-       target="_blank">
-       Buy with Cash App
-    </a>
-  </div>
-
-  <!-- PRODUCT -->
-  <div class="product-card">
-    <div class="save-badge">Save $40.00 USD</div>
-    <img src="./assets/placeholder.png" />
-    <h3>Snowstorm Bundle</h3>
-    <div class="price">
-      <span class="current">$9.99 USD</span>
-      <span class="old">$49.99 USD</span>
-    </div>
-
-    <a class="buy-btn"
-       href="https://cash.app/$YOURCASHTAG/9.99"
-       target="_blank">
-       Buy with Cash App
-    </a>
-  </div>
-
-</main>
-
-<footer class="footer">
-  <p>
-    After payment, follow the instructions below to receive your item.
-  </p>
-  <a href="./instructions.html">📄 How to receive items</a>
-
-  <p class="disclaimer">
-    This site is not affiliated with Roblox or Murder Mystery 2.
-    All items are digital services.
-  </p>
-</footer>
-
+<script src="products.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
