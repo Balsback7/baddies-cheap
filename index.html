@@ -12,27 +12,33 @@
 <body class="shop">
 
 <header class="topbar">
-  <div class="header-content">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
     <h1>Baddies Cheap</h1>
-    
-    <div class="header-actions">
-      <div class="controls">
-        <input id="search" type="text" placeholder="Search items…" />
-        <select id="sort">
-          <option value="relevance">Relevance</option>
-          <option value="price">Price: Low to High</option>
-        </select>
-      </div>
-      
-      <a href="cart.html" class="cart-button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-        <span class="cart-count">0</span>
-      </a>
-    </div>
+    <a href="cart.html" style="position: relative; padding: 8px;">
+      <span style="font-size: 20px;">🛒</span>
+      <span class="cart-count" style="
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      ">0</span>
+    </a>
+  </div>
+
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search items…" />
+    <select id="sort">
+      <option value="relevance">Relevance</option>
+      <option value="price">Price: Low to High</option>
+    </select>
   </div>
 </header>
 
