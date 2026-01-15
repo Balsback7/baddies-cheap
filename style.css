@@ -5,7 +5,7 @@
 body.shop {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
-  background: #f6f7f9; /* soft gray */
+  background: #f6f7f9;
   color: #111;
 }
 
@@ -17,29 +17,23 @@ body.shop {
 }
 
 .topbar h1 {
-  margin: 0 0 10px;
+  margin: 0 0 14px;
   font-size: 22px;
   font-weight: 600;
 }
 
-/* TABS */
-.tabs {
+/* CONTROLS */
+.controls {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-.tabs button {
-  padding: 6px 14px;
-  border-radius: 999px;
+.controls input,
+.controls select {
+  padding: 8px 12px;
+  border-radius: 8px;
   border: 1px solid #ddd;
-  background: white;
-  font-size: 13px;
-  cursor: default;
-}
-
-.tabs .active {
-  border-color: #bbb;
-  background: #f2f2f2;
+  font-size: 14px;
 }
 
 /* WRAPPER */
@@ -73,7 +67,7 @@ body.shop {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* STOCK BADGE */
+/* BADGES */
 .stock {
   position: absolute;
   top: 10px;
@@ -84,6 +78,18 @@ body.shop {
   padding: 4px 8px;
   border-radius: 999px;
   font-weight: 500;
+}
+
+.deal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff1c1;
+  color: #8a6a00;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 600;
 }
 
 /* IMAGE */
@@ -113,40 +119,9 @@ body.shop {
   color: #999;
 }
 
-/* PRODUCT PAGE */
-.product-page {
-  max-width: 420px;
-  margin: 60px auto;
-  padding: 24px;
-  background: white;
-  border: 1px solid #e3e3e3;
-  border-radius: 16px;
-  text-align: center;
-}
-
-/* BUY BUTTON */
-.buy {
-  display: block;
-  margin-top: 22px;
-  padding: 14px;
-  background: #00d632;
-  color: black;
-  font-weight: 600;
-  border-radius: 10px;
-  text-decoration: none;
-}
-
-.buy:hover {
-  background: #00b92a;
-}
-
-/* MOBILE POLISH */
+/* MOBILE */
 @media (max-width: 600px) {
-  .items-wrapper {
-    padding: 18px;
-  }
-
-  .topbar {
-    padding: 18px;
+  .controls {
+    flex-direction: column;
   }
 }
