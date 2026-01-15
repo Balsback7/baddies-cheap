@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Baddies Cheap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="shop">
 
-<header class="navbar">
-  <div class="logo">MM2 <span>BADDIES</span></div>
-  <nav>
-    <button onclick="filter('all')">All</button>
-    <button onclick="filter('weapons')">Weapons</button>
-  </nav>
+<header class="topbar">
+  <h1>Baddies Cheap</h1>
 </header>
 
-<main id="products" class="grid"></main>
+<main class="items-wrapper">
+  <div id="products" class="items-grid"></div>
+</main>
 
 <script src="products.js"></script>
 <script src="script.js"></script>
