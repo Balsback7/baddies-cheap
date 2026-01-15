@@ -5,20 +5,41 @@
 body.shop {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
-  background: #ffffff;
+  background: #f6f7f9; /* soft gray */
   color: #111;
 }
 
 /* HEADER */
 .topbar {
   padding: 22px 30px;
-  border-bottom: 1px solid #eaeaea;
+  background: white;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .topbar h1 {
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 22px;
   font-weight: 600;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tabs button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 13px;
+  cursor: default;
+}
+
+.tabs .active {
+  border-color: #bbb;
+  background: #f2f2f2;
 }
 
 /* WRAPPER */
@@ -37,18 +58,32 @@ body.shop {
 
 /* CARD */
 .card {
-  background: #fff;
-  border: 1px solid #eaeaea;
-  border-radius: 12px;
+  position: relative;
+  background: white;
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
   padding: 14px;
   text-decoration: none;
   color: #111;
-  transition: border 0.15s ease, transform 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .card:hover {
-  border-color: #cfcfcf;
   transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* STOCK BADGE */
+.stock {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e9f8ef;
+  color: #118a43;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 500;
 }
 
 /* IMAGE */
@@ -57,18 +92,17 @@ body.shop {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   border-radius: 10px;
-  background: #f7f7f7;
+  background: #f3f3f3;
   padding: 10px;
 }
 
-/* NAME */
+/* TEXT */
 .card h3 {
   margin: 10px 0 4px;
   font-size: 15px;
   font-weight: 500;
 }
 
-/* PRICE */
 .price {
   font-size: 14px;
 }
@@ -84,14 +118,10 @@ body.shop {
   max-width: 420px;
   margin: 60px auto;
   padding: 24px;
-  border: 1px solid #eaeaea;
-  border-radius: 14px;
+  background: white;
+  border: 1px solid #e3e3e3;
+  border-radius: 16px;
   text-align: center;
-}
-
-.product-page img {
-  width: 100%;
-  border-radius: 12px;
 }
 
 /* BUY BUTTON */
@@ -108,4 +138,15 @@ body.shop {
 
 .buy:hover {
   background: #00b92a;
+}
+
+/* MOBILE POLISH */
+@media (max-width: 600px) {
+  .items-wrapper {
+    padding: 18px;
+  }
+
+  .topbar {
+    padding: 18px;
+  }
 }
