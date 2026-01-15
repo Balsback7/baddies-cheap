@@ -3,7 +3,7 @@ const products = [
     id: "loveboard",
     name: "Loveboard",
     category: "weapons",
-    price: 7.99,
+    price: 13,
     oldPrice: 29.99,
     image: "https://cdn.meowia.com/baddies/loveboard.png",
     description: "Exclusive Loveboard weapon"
@@ -12,7 +12,7 @@ const products = [
     id: "brassknuckles",
     name: "Brass Knuckles",
     category: "weapons",
-    price: 5.99,
+    price: 12,
     oldPrice: 19.99,
     image: "https://cdn.meowia.com/baddies/brass-knuckles.png",
     description: "Heavy-hitting Brass Knuckles"
