@@ -1,30 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Product</title>
+  <meta charset="UTF-8">
+  <title>Product - Baddies Cheap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Product page specific styles */
+    .product-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    @media (min-width: 768px) {
+      .product-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #555;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid #ddd;
+    }
+
+    .back-link:hover {
+      background: #f8f8f8;
+    }
+
+    .product-image {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #f3f3f3;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .product-details {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-size: 28px;
+      margin: 0 0 20px 0;
+      font-weight: 600;
+    }
+
+    .product-description {
+      line-height: 1.6;
+      margin-bottom: 25px;
+      color: #444;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 30px;
+    }
+
+    .old-price {
+      font-size: 18px;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: 10px;
+      font-weight: 400;
+    }
+
+    .buy-button {
+      display: inline-block;
+      background: #00D632;
+      color: white;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      text-align: center;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .buy-button:hover {
+      background: #00C12E;
+    }
+
+    .error-message {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .error-message h2 {
+      color: #e53935;
+    }
+
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .continue-shopping {
+      display: inline-block;
+      text-align: center;
+      padding: 12px 24px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #555;
+      background: white;
+    }
+
+    .continue-shopping:hover {
+      background: #f8f8f8;
+    }
+
+    .stock-badge {
+      display: inline-block;
+      background: #e9f8ef;
+      color: #118a43;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .product-container {
+        padding: 20px;
+      }
+      
+      .product-name {
+        font-size: 24px;
+      }
+      
+      .product-price {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body class="shop">
 
-<div id="product" class="product-page"></div>
+<div class="product-container">
+  <a href="index.html" class="back-link">← Back to Shop</a>
+  
+  <div id="product-content">
+    <!-- Product content will be loaded here -->
+  </div>
+</div>
 
 <script src="products.js"></script>
 <script>
-const id = new URLSearchParams(window.location.search).get("id");
-const p = products.find(x => x.id === id);
-
-document.getElementById("product").innerHTML = `
-  <img src="${p.image}">
-  <h1>${p.name}</h1>
-  <p>${p.description}</p>
-  <h2>$${p.price} <span>$${p.oldPrice}</span></h2>
-
-  <a class="buy"
-     href="https://cash.app/$lovinMoneynfood/${p.price}"
-     target="_blank">
-     Buy with Cash App
-  </a>
-`;
+  const id = new URLSearchParams(window.location.search).get("id");
+  const productContent = document.getElementById("product-content");
+  
+  // Check if products.js is loaded
+  if (typeof products === 'undefined') {
+    productContent.innerHTML = `
+      <div class="error-message">
+        <h2>Error Loading Products</h2>
+        <p>Unable to load product data. Please try again later.</p>
+        <a href="index.html" class="continue-shopping">Continue Shopping</a>
+      </div>
+    `;
+  } else if (!id) {
+    // No ID provided
+    productContent.innerHTML = `
+      <div class="error-message">
+        <h2>Product Not Found</h2>
+        <p>No product ID was specified.</p>
+        <a href="index.html" class="continue-shopping">Browse All Products</a>
+      </div>
+    `;
+  } else {
+    const p = products.find(x => x.id === id);
+    
+    if (!p) {
+      // Product not found
+      productContent.innerHTML = `
+        <div class="error-message">
+          <h2>Product Not Found</h2>
+          <p>The product you're looking for doesn't exist.</p>
+          <a href="index.html" class="continue-shopping">Continue Shopping</a>
+        </div>
+      `;
+    } else {
+      // Display product
+      document.title = `${p.name} - Baddies Cheap`;
+      
+      // Check if product has stock badge
+      const stockBadge = p.stock ? `<span class="stock-badge">In Stock</span>` : '';
+      
+      productContent.innerHTML = `
+        <div>
+          <img src="${p.image}" alt="${p.name}" class="product-image">
+        </div>
+        <div class="product-details">
+          ${stockBadge}
+          <h1 class="product-name">${p.name}</h1>
+          <p class="product-description">${p.description}</p>
+          <div class="product-price">
+            $${p.price}
+            ${p.oldPrice ? `<span class="old-price">$${p.oldPrice}</span>` : ''}
+          </div>
+          
+          <div class="product-actions">
+            <a class="buy-button"
+               href="https://cash.app/$lovinMoneynfood/${p.price}"
+               target="_blank">
+               Buy with Cash App
+            </a>
+            <a href="index.html" class="continue-shopping">Continue Shopping</a>
+          </div>
+        </div>
+      `;
+    }
+  }
 </script>
 
 </body>
