@@ -1,72 +1,96 @@
-body {
+body.shop {
   margin: 0;
   font-family: Inter, Arial;
-  background: #0b0b0b;
-  color: white;
+  background: white;
+  color: black;
 }
 
 .navbar {
-  padding: 20px;
+  padding: 20px 30px;
   display: flex;
   justify-content: space-between;
-  background: #111;
+  background: white;
+  border-bottom: 1px solid #eee;
 }
 
 .navbar button {
   background: none;
   border: none;
-  color: #aaa;
-  margin: 0 8px;
+  font-size: 14px;
   cursor: pointer;
-}
-
-.navbar button:hover {
-  color: white;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 30px;
+  gap: 30px;
+  padding: 40px;
 }
 
 .card {
-  background: #141414;
-  border-radius: 10px;
-  padding: 15px;
+  position: relative;
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
   text-decoration: none;
-  color: white;
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
+  color: black;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
 .card img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.card h3 {
+  margin: 12px 0 5px;
 }
 
 .price span {
   text-decoration: line-through;
-  color: #777;
+  color: #888;
 }
 
 .product-page {
-  max-width: 500px;
-  margin: 60px auto;
+  max-width: 450px;
+  margin: 70px auto;
   text-align: center;
+  position: relative;
 }
 
 .buy {
   display: block;
-  margin-top: 20px;
-  padding: 14px;
+  margin-top: 25px;
+  padding: 15px;
   background: #00d632;
   color: black;
-  border-radius: 8px;
-  text-decoration: none;
   font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+/* 🌈 RAINBOW BACKGROUND */
+.rainbow-bg {
+  position: absolute;
+  inset: -40px;
+  background: linear-gradient(
+    120deg,
+    red, orange, yellow, green, cyan, blue, violet
+  );
+  filter: blur(40px);
+  opacity: 0.6;
+  animation: rainbow 6s linear infinite;
+  z-index: 1;
+}
+
+.rainbow-bg.big {
+  inset: -80px;
+}
+
+@keyframes rainbow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
