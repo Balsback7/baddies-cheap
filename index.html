@@ -1,5 +1,3 @@
-[file name]: index.html
-[file content begin]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,26 +10,7 @@
 <body class="shop">
 
 <header class="topbar">
-  <div class="topbar-header">
-    <h1>Baddies Cheap</h1>
-    <a href="cart.html" class="cart-button">
-      <span style="font-size: 20px;">🛒</span>
-      <span class="cart-count" style="
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: red;
-        color: white;
-        font-size: 12px;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-      ">0</span>
-    </a>
-  </div>
+  <h1>Baddies Cheap</h1>
 
   <div class="controls">
     <input id="search" type="text" placeholder="Search items…" />
@@ -43,30 +22,10 @@
 </header>
 
 <main class="items-wrapper">
-  <div id="products" class="items-grid">
-    <!-- Products will load here -->
-  </div>
+  <div id="products" class="items-grid"></div>
 </main>
 
-<!-- IMPORTANT: Load products.js BEFORE script.js -->
 <script src="products.js"></script>
-<script src="cart.js"></script>
 <script src="script.js"></script>
-
-<script>
-  // Initialize cart count after scripts load
-  document.addEventListener('DOMContentLoaded', function() {
-    // Update cart count
-    const cart = JSON.parse(localStorage.getItem('baddiesCart')) || [];
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const cartCountElement = document.querySelector('.cart-count');
-    
-    if (cartCountElement) {
-      cartCountElement.textContent = count;
-      cartCountElement.style.display = count > 0 ? 'flex' : 'none';
-    }
-  });
-</script>
 </body>
 </html>
-[file content end]
