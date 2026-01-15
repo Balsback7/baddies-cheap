@@ -4,7 +4,7 @@
   <title>Product</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="shop">
 
 <div id="product" class="product-page"></div>
 
@@ -14,13 +14,14 @@ const id = new URLSearchParams(window.location.search).get("id");
 const p = products.find(x => x.id === id);
 
 document.getElementById("product").innerHTML = `
+  <div class="rainbow-bg big"></div>
   <img src="${p.image}">
   <h1>${p.name}</h1>
   <p>${p.description}</p>
   <h2>$${p.price} <span>$${p.oldPrice}</span></h2>
 
   <a class="buy"
-     href="https://cash.app/$YOURCASHTAG/${p.price}"
+     href="https://cash.app/$lovinMoneynfood/${p.price}"
      target="_blank">
      Buy with Cash App
   </a>
