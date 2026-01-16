@@ -1,9 +1,11 @@
+/* GLOBAL RESET */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body.shop {
-  margin: 0;
   font-family: Inter, Arial, sans-serif;
   background: #f6f7f9;
   color: #111;
@@ -12,12 +14,14 @@ body.shop {
 /* HEADER */
 .topbar {
   padding: 22px 30px;
-  background: white;
+  background: #fff;
   border-bottom: 1px solid #e4e4e4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .topbar h1 {
-  margin: 0 0 14px;
   font-size: 22px;
   font-weight: 600;
 }
@@ -25,6 +29,7 @@ body.shop {
 /* CONTROLS */
 .controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -34,13 +39,20 @@ body.shop {
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.controls input:focus,
+.controls select:focus {
+  border-color: #118a43; /* subtle focus highlight */
 }
 
 /* WRAPPER */
 .items-wrapper {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 30px 20px;
 }
 
 /* GRID */
@@ -53,7 +65,7 @@ body.shop {
 /* CARD */
 .card {
   position: relative;
-  background: white;
+  background: #fff;
   border: 1px solid #e3e3e3;
   border-radius: 14px;
   padding: 14px;
@@ -64,7 +76,7 @@ body.shop {
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* BADGES */
@@ -100,6 +112,7 @@ body.shop {
   border-radius: 10px;
   background: #f3f3f3;
   padding: 10px;
+  display: block;
 }
 
 /* TEXT */
@@ -111,17 +124,24 @@ body.shop {
 
 .price {
   font-size: 14px;
+  font-weight: 500;
 }
 
 .price span {
   margin-left: 6px;
   text-decoration: line-through;
   color: #999;
+  font-weight: 400;
 }
 
 /* MOBILE */
 @media (max-width: 600px) {
   .controls {
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .items-wrapper {
+    padding: 20px 10px;
   }
 }
