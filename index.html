@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Baddies Cheap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Baddies Cheap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="shop">
-    <header class="topbar">
-        <h1>Baddies Cheap</h1>
-        <div class="controls">
-            <input id="search" type="text" placeholder="Search items…" />
-            <select id="sort">
-                <option value="relevance">Relevance</option>
-                <option value="price">Price: Low to High</option>
-            </select>
-        </div>
-    </header>
 
-    <main class="items-wrapper">
-        <div id="products" class="items-grid"></div>
-    </main>
+<header class="topbar">
+  <h1>Baddies Cheap</h1>
 
-    <script src="products.js"></script>
-    <script src="script.js"></script>
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search items…" />
+    <select id="sort">
+      <option value="relevance">Relevance</option>
+      <option value="price">Price: Low to High</option>
+    </select>
+  </div>
+</header>
+
+<main class="items-wrapper">
+  <div id="products" class="items-grid"></div>
+</main>
+
+<script src="products.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
