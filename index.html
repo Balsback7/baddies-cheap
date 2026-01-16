@@ -5,6 +5,8 @@
     <title>Baddies Cheap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Pay SDK -->
+    <script async src="https://pay.google.com/gp/p/js/pay.js"></script>
 </head>
 <body class="shop">
     <header class="topbar">
@@ -22,7 +24,17 @@
         <div id="products" class="items-grid"></div>
     </main>
 
+    <!-- Payment success modal (hidden by default) -->
+    <div id="payment-success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>🎉 Payment Successful!</h2>
+            <p>Your order has been processed. You will receive a confirmation email shortly.</p>
+            <button onclick="closeModal()">Continue Shopping</button>
+        </div>
+    </div>
+
     <script src="products.js"></script>
     <script src="script.js"></script>
+    <script src="google-pay.js"></script>
 </body>
 </html>
