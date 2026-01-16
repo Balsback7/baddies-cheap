@@ -1,68 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Cart - Baddies Cheap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Your Cart - Baddies Cheap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;background:#f4f4f4}
+
+.header{
+  background:#fff;
+  border-bottom:1px solid #eee;
+  padding:16px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.wrapper{
+  max-width:1000px;
+  margin:auto;
+  padding:30px;
+}
+
+.item{
+  background:#fff;
+  padding:16px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.total{
+  font-size:24px;
+  font-weight:700;
+  margin-top:20px;
+}
+
+.checkout{
+  display:block;
+  margin-top:20px;
+  background:black;
+  color:white;
+  padding:18px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:600;
+}
+</style>
 </head>
 
-<body class="shop">
+<body>
 
-<div class="product-page-wrapper">
-  <h1 style="margin-bottom: 20px;">Your Cart</h1>
+<div class="header">
+  <b>Baddies Cheap</b>
+  <a href="index.html">← Continue shopping</a>
+</div>
 
-  <div id="cart"></div>
+<div class="wrapper">
+  <h1>Your Cart</h1>
+  <div id="items"></div>
+  <div class="total" id="total"></div>
 
-  <a id="checkout"
-     class="buy"
-     style="display:none"
-     target="_blank">
-     Checkout with Cash App
+  <a class="checkout" href="https://cash.app/$lovinMoneynfood" target="_blank">
+    Pay via Cash App
   </a>
 </div>
 
-<script src="cart.js"></script>
 <script>
-const cartDiv = document.getElementById("cart");
-const checkoutBtn = document.getElementById("checkout");
+const CART_KEY="baddies_cart";
+const cart=JSON.parse(localStorage.getItem(CART_KEY))||[];
+const items=document.getElementById("items");
+const totalEl=document.getElementById("total");
 
-function renderCart() {
-  const cart = getCart();
-  cartDiv.innerHTML = "";
+let total=0;
 
-  if (cart.length === 0) {
-    cartDiv.innerHTML = "<p>Your cart is empty.</p>";
-    checkoutBtn.style.display = "none";
-    return;
-  }
-
-  let total = 0;
-
-  cart.forEach(item => {
-    total += item.price * item.qty;
-
-    cartDiv.innerHTML += `
-      <div class="card" style="display:flex;gap:16px;align-items:center;">
-        <img src="${item.image}" style="width:80px;">
-        <div style="flex:1;">
-          <strong>${item.name}</strong><br>
-          $${item.price} × ${item.qty}
-        </div>
-        <div>
-          <button onclick="changeQty('${item.id}',1)">+</button>
-          <button onclick="changeQty('${item.id}',-1)">−</button>
-          <button onclick="removeFromCart('${item.id}')">✕</button>
-        </div>
+if(cart.length===0){
+  items.innerHTML="<p>Your cart is empty.</p>";
+}else{
+  cart.forEach(p=>{
+    total+=Number(p.price);
+    items.innerHTML+=`
+      <div class="item">
+        <span>${p.name}</span>
+        <b>$${p.price}</b>
       </div>
     `;
   });
-
-  checkoutBtn.style.display = "block";
-  checkoutBtn.href = `https://cash.app/$lovinMoneynfood/${total.toFixed(2)}`;
-  checkoutBtn.textContent = `Checkout • $${total.toFixed(2)}`;
 }
 
-renderCart();
+totalEl.textContent="Total: $"+total.toFixed(2);
 </script>
 
 </body>
