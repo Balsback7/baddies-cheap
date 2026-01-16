@@ -1,31 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Baddies Cheap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Baddies Cheap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;background:#f4f4f4}
+a{text-decoration:none;color:inherit}
+
+header{
+  background:#000;color:#fff;
+  padding:16px 20px;
+  display:flex;justify-content:space-between;align-items:center
+}
+
+.cart-btn{position:relative;font-size:18px}
+.cart-count{
+  position:absolute;top:-6px;right:-10px;
+  background:red;color:#fff;font-size:12px;
+  padding:2px 6px;border-radius:50%
+}
+
+.wrapper{max-width:1200px;margin:auto;padding:24px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:24px
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  border:1px solid #e5e5e5;
+  transition:.2s;
+  cursor:pointer
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,.08)
+}
+
+.thumb{
+  background:linear-gradient(135deg,#ff0080,#7928ca,#2afadf);
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:12px
+}
+.thumb img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  background:#fff;
+  border-radius:10px;
+  padding:10px
+}
+
+.price{font-size:20px;font-weight:700}
+.stock{color:#1a8f3c;font-size:14px}
+</style>
 </head>
+<body>
 
-<body class="shop">
-
-<header class="topbar">
-  <h1>Baddies Cheap</h1>
-
-  <div class="controls">
-    <input id="search" type="text" placeholder="Search items…" />
-    <select id="sort">
-      <option value="relevance">Relevance</option>
-      <option value="price">Price: Low to High</option>
-    </select>
+<header>
+  <b>Baddies Cheap</b>
+  <div class="cart-btn">
+    🛒 <span id="cartCount" class="cart-count">0</span>
   </div>
 </header>
 
-<main class="items-wrapper">
-  <div id="products" class="items-grid"></div>
-</main>
+<div class="wrapper">
+  <div class="grid" id="shop"></div>
+</div>
 
 <script src="products.js"></script>
-<script src="script.js"></script>
+<script>
+const CART_KEY="baddies_cart";
+
+function getCart(){
+  return JSON.parse(localStorage.getItem(CART_KEY))||[];
+}
+function updateCart(){
+  document.getElementById("cartCount").textContent=getCart().length;
+}
+updateCart();
+
+const shop=document.getElementById("shop");
+
+products.forEach(p=>{
+  shop.innerHTML+=`
+    <a href="product.html?id=${p.id}">
+      <div class="card">
+        <div class="thumb">
+          <img src="${p.image}">
+        </div>
+        <h3>${p.name}</h3>
+        <div class="price">$${p.price}</div>
+        <div class="stock">In stock (${p.stock})</div>
+      </div>
+    </a>
+  `;
+});
+</script>
+
 </body>
 </html>
