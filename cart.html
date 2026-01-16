@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart - Baddies Cheap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="shop">
+
+<div class="product-page-wrapper">
+  <h1 style="margin-bottom: 20px;">Your Cart</h1>
+
+  <div id="cart"></div>
+
+  <a id="checkout"
+     class="buy"
+     style="display:none"
+     target="_blank">
+     Checkout with Cash App
+  </a>
+</div>
+
+<script src="cart.js"></script>
+<script>
+const cartDiv = document.getElementById("cart");
+const checkoutBtn = document.getElementById("checkout");
+
+function renderCart() {
+  const cart = getCart();
+  cartDiv.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+    checkoutBtn.style.display = "none";
+    return;
+  }
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.qty;
+
+    cartDiv.innerHTML += `
+      <div class="card" style="display:flex;gap:16px;align-items:center;">
+        <img src="${item.image}" style="width:80px;">
+        <div style="flex:1;">
+          <strong>${item.name}</strong><br>
+          $${item.price} × ${item.qty}
+        </div>
+        <div>
+          <button onclick="changeQty('${item.id}',1)">+</button>
+          <button onclick="changeQty('${item.id}',-1)">−</button>
+          <button onclick="removeFromCart('${item.id}')">✕</button>
+        </div>
+      </div>
+    `;
+  });
+
+  checkoutBtn.style.display = "block";
+  checkoutBtn.href = `https://cash.app/$lovinMoneynfood/${total.toFixed(2)}`;
+  checkoutBtn.textContent = `Checkout • $${total.toFixed(2)}`;
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
