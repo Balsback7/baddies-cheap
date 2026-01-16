@@ -7,53 +7,88 @@
 
 <style>
 *{box-sizing:border-box;font-family:system-ui}
-body{margin:0;background:#f4f4f4}
+body{margin:0;background:#f6f6f6;color:#111}
 a{text-decoration:none;color:inherit}
 
 header{
-  background:#000;color:#fff;
-  padding:16px 20px;
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  padding:16px 24px;
   display:flex;justify-content:space-between;align-items:center
 }
-
-.cart-btn{position:relative;font-size:18px}
+.cart-btn{position:relative;font-size:20px}
 .cart-count{
   position:absolute;top:-6px;right:-10px;
-  background:red;color:#fff;font-size:12px;
+  background:#000;color:#fff;font-size:12px;
   padding:2px 6px;border-radius:50%
 }
 
-.wrapper{max-width:1200px;margin:auto;padding:24px}
+.wrapper{max-width:1200px;margin:auto;padding:30px}
+
 .product{
-  background:#fff;border-radius:16px;
-  padding:30px;
-  display:grid;gap:40px
+  background:#fff;
+  border-radius:18px;
+  padding:40px;
+  display:grid;
+  gap:50px;
+  box-shadow:0 4px 14px rgba(0,0,0,.04)
 }
 @media(min-width:768px){
   .product{grid-template-columns:1fr 1fr}
 }
 
-.product img{
+.image-wrap{
+  background:linear-gradient(135deg,#ff4ecd,#7c4dff,#3bf0e4);
+  padding:20px;
+  border-radius:18px
+}
+.image-wrap img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:contain;
-  background:#fafafa;
+  background:#fff;
   border-radius:14px;
   padding:20px
 }
 
-.price{font-size:32px;font-weight:700;margin:10px 0}
-button,a.buy{
+.price{font-size:34px;font-weight:800;margin:12px 0}
+.stock{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#e9f8ef;
+  color:#118a43;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:14px;
+  margin-bottom:20px
+}
+
+.actions button,
+.actions a{
   display:block;
-  padding:16px;
-  border-radius:10px;
-  font-weight:600;
+  padding:18px;
+  border-radius:12px;
+  font-weight:700;
   margin-bottom:14px;
   text-align:center;
   cursor:pointer
 }
-.add{background:#fff;border:2px solid #000}
-.buy{background:#000;color:#fff;border:none}
+.add{
+  background:#fff;
+  border:2px solid #e5e5e5
+}
+.add:hover{border-color:#111}
+.buy{
+  background:#000;
+  color:#fff
+}
+
+.desc{
+  margin-top:20px;
+  color:#444;
+  line-height:1.6
+}
 </style>
 </head>
 <body>
@@ -96,17 +131,27 @@ if(!p){
   document.title=p.name+" - Baddies Cheap";
   wrap.innerHTML=`
     <div class="product">
-      <img src="${p.image}">
+      <div class="image-wrap">
+        <img src="${p.image}">
+      </div>
+
       <div>
         <h1>${p.name}</h1>
+        <div class="stock">${p.stock} in stock</div>
         <div class="price">$${p.price}</div>
-        <button class="add" onclick='addToCart(${JSON.stringify(p)})'>
-          Add to cart
-        </button>
-        <a class="buy" href="https://cash.app/$lovinMoneynfood/${p.price}" target="_blank">
-          Buy Now
-        </a>
-        <p>${p.description.replace(/\n/g,"<br>")}</p>
+
+        <div class="actions">
+          <button class="add" onclick='addToCart(${JSON.stringify(p)})'>
+            Add to cart
+          </button>
+          <a class="buy" href="https://cash.app/$lovinMoneynfood/${p.price}" target="_blank">
+            Buy it now
+          </a>
+        </div>
+
+        <div class="desc">
+          ${p.description.replace(/\n/g,"<br>")}
+        </div>
       </div>
     </div>
   `;
