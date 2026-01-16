@@ -7,65 +7,72 @@
 
 <style>
 *{box-sizing:border-box;font-family:system-ui}
-body{margin:0;background:#f4f4f4}
+body{margin:0;background:#fff;color:#111}
 a{text-decoration:none;color:inherit}
 
 header{
-  background:#000;color:#fff;
-  padding:16px 20px;
+  position:sticky;top:0;z-index:10;
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  padding:16px 24px;
   display:flex;justify-content:space-between;align-items:center
 }
 
-.cart-btn{position:relative;font-size:18px}
+.logo{font-size:20px;font-weight:800}
+.cart-btn{position:relative;font-size:20px}
 .cart-count{
   position:absolute;top:-6px;right:-10px;
-  background:red;color:#fff;font-size:12px;
+  background:#000;color:#fff;font-size:12px;
   padding:2px 6px;border-radius:50%
 }
 
-.wrapper{max-width:1200px;margin:auto;padding:24px}
+.wrapper{max-width:1300px;margin:auto;padding:30px}
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-  gap:24px
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:26px
 }
 
 .card{
   background:#fff;
-  border-radius:14px;
+  border-radius:16px;
+  border:1px solid #eaeaea;
   padding:16px;
-  border:1px solid #e5e5e5;
-  transition:.2s;
-  cursor:pointer
+  transition:.25s;
 }
 .card:hover{
   transform:translateY(-4px);
-  box-shadow:0 8px 20px rgba(0,0,0,.08)
+  box-shadow:0 10px 25px rgba(0,0,0,.08)
 }
 
 .thumb{
-  background:linear-gradient(135deg,#ff0080,#7928ca,#2afadf);
-  border-radius:12px;
+  border-radius:14px;
   padding:14px;
-  margin-bottom:12px
+  background:linear-gradient(135deg,#ff4ecd,#7c4dff,#3bf0e4);
 }
 .thumb img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:contain;
   background:#fff;
-  border-radius:10px;
-  padding:10px
+  border-radius:12px;
+  padding:12px
 }
 
-.price{font-size:20px;font-weight:700}
-.stock{color:#1a8f3c;font-size:14px}
+.card h3{margin:14px 0 6px}
+.price{font-weight:700;font-size:20px}
+.stock{
+  margin-top:6px;
+  font-size:14px;
+  color:#118a43
+}
 </style>
 </head>
 <body>
 
 <header>
-  <b>Baddies Cheap</b>
+  <div class="logo">Baddies Cheap</div>
   <div class="cart-btn">
     🛒 <span id="cartCount" class="cart-count">0</span>
   </div>
@@ -98,7 +105,7 @@ products.forEach(p=>{
         </div>
         <h3>${p.name}</h3>
         <div class="price">$${p.price}</div>
-        <div class="stock">In stock (${p.stock})</div>
+        <div class="stock">${p.stock} in stock</div>
       </div>
     </a>
   `;
