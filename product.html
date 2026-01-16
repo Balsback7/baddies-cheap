@@ -1,22 +1,265 @@
-const products = [
-  {
-    id: "loveboard",
-    name: "Loveboard",
-    category: "weapons",
-    price: 13,
-    oldPrice: 29.99,
-    image: "https://cdn.meowia.com/baddies/loveboard.png",
-    description: "Exclusive Loveboard weapon",
-    relevance: 1
-  },
-  {
-    id: "brassknuckles",
-    name: "Brass Knuckles",
-    category: "weapons",
-    price: 12,
-    oldPrice: 19.99,
-    image: "https://cdn.meowia.com/baddies/brass-knuckles.png",
-    description: "Heavy-hitting Brass Knuckles",
-    relevance: 2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product - Baddies Cheap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .top-bar {
+      background: #000;
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .cart-btn {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    /* Page */
+    .product-page-wrapper {
+      max-width: 1200px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    .breadcrumb {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .product-container {
+      background: #fff;
+      border-radius: 14px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    }
+
+    @media (min-width: 768px) {
+      .product-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Image */
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    /* Details */
+    .product-title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .stock {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e9f8ef;
+      color: #118a43;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    button {
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .add-cart {
+      background: #fff;
+      border: 2px solid #000;
+    }
+
+    .add-cart:hover {
+      background: #f2f2f2;
+    }
+
+    .buy-now {
+      background: #000;
+      color: #fff;
+    }
+
+    .buy-now:hover {
+      background: #222;
+    }
+
+    .description {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .message {
+      background: #fff;
+      padding: 40px;
+      border-radius: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="top-bar">
+  <div class="logo">Baddies Cheap</div>
+  <div class="cart-btn">
+    🛒 Cart
+    <span class="cart-count" id="cart-count">0</span>
+  </div>
+</div>
+
+<div class="product-page-wrapper">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> / <a href="index.html">Shop</a> / <span id="breadcrumb"></span>
+  </div>
+
+  <div id="product-content"></div>
+</div>
+
+<script src="products.js"></script>
+<script>
+  const cartKey = "baddies_cart";
+
+  function getCart() {
+    return JSON.parse(localStorage.getItem(cartKey)) || [];
   }
-];
+
+  function updateCartCount() {
+    document.getElementById("cart-count").textContent = getCart().length;
+  }
+
+  function addToCart(product) {
+    const cart = getCart();
+    cart.push(product);
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    updateCartCount();
+  }
+
+  updateCartCount();
+
+  const id = new URLSearchParams(window.location.search).get("id");
+  const container = document.getElementById("product-content");
+
+  if (!window.products || !id) {
+    container.innerHTML = `
+      <div class="message">
+        <h2>Product Not Found</h2>
+        <a href="index.html">Return to shop</a>
+      </div>
+    `;
+  } else {
+    const p = products.find(x => x.id === id);
+
+    if (!p) {
+      container.innerHTML = `
+        <div class="message">
+          <h2>Product Not Found</h2>
+          <a href="index.html">Return to shop</a>
+        </div>
+      `;
+    } else {
+      document.title = p.name + " - Baddies Cheap";
+      document.getElementById("breadcrumb").textContent = p.name;
+
+      container.innerHTML = `
+        <div class="product-container">
+          <img src="${p.image}" class="product-image" alt="${p.name}">
+
+          <div>
+            <h1 class="product-title">${p.name}</h1>
+            <div class="stock">In stock • Instant delivery</div>
+            <div class="price">$${p.price}</div>
+
+            <div class="actions">
+              <button class="add-cart" onclick='addToCart(${JSON.stringify(p)})'>
+                Add to Cart
+              </button>
+              <a class="buy-now" 
+                 href="https://cash.app/$lovinMoneynfood/${p.price}" 
+                 target="_blank">
+                Buy Now
+              </a>
+            </div>
+
+            <div class="description">
+              ${p.description.replace(/\n/g, "<br>")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
